@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 
 class LoginViewController: UIViewController {
 
@@ -13,12 +14,19 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.view = loginView
     }
+    
+    private lazy var loginView = LoginView().then {
+        $0.loginButton.addTarget(self, action: #selector(LoginButtonTapped) , for: .touchUpInside)
+    }
 
-    private lazy var loginView : LoginView = {
-        let view = LoginView()
+    @objc
+    private func LoginButtonTapped() {
+        let BaseVC = BaseViewController()
         
-        return view
-    }()
-
+        let navController = UINavigationController(rootViewController: BaseVC)
+        
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
 }
 

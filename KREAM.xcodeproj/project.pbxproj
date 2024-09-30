@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4143BCC62CA3167100A4F3CC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4143BCC52CA3167100A4F3CC /* SnapKit */; };
+		41BD3C332CA5620F006775E3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 41BD3C322CA5620F006775E3 /* Then */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4143BC992CA3146800A4F3CC /* KREAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KREAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4143BCC62CA3167100A4F3CC /* SnapKit in Frameworks */,
+				41BD3C332CA5620F006775E3 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = KREAM;
 			packageProductDependencies = (
+				4143BCC52CA3167100A4F3CC /* SnapKit */,
+				41BD3C322CA5620F006775E3 /* Then */,
 			);
 			productName = KREAM;
 			productReference = 4143BC992CA3146800A4F3CC /* KREAM.app */;
@@ -107,6 +116,10 @@
 			);
 			mainGroup = 4143BC902CA3146800A4F3CC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4143BCC42CA3167000A4F3CC /* XCRemoteSwiftPackageReference "SnapKit" */,
+				41BD3C312CA5620F006775E3 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4143BC9A2CA3146800A4F3CC /* Products */;
 			projectDirPath = "";
@@ -150,7 +163,6 @@
 				INFOPLIST_FILE = KREAM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -178,7 +190,6 @@
 				INFOPLIST_FILE = KREAM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -335,6 +346,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4143BCC42CA3167000A4F3CC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		41BD3C312CA5620F006775E3 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4143BCC52CA3167100A4F3CC /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4143BCC42CA3167000A4F3CC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		41BD3C322CA5620F006775E3 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41BD3C312CA5620F006775E3 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4143BC912CA3146800A4F3CC /* Project object */;
 }

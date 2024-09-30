@@ -1,13 +1,13 @@
 //
-//  LoginViewController.swift
+//  ShopViewController.swift
 //  KREAM
 //
-//  Created by 오현민 on 9/25/24.
+//  Created by 오현민 on 9/26/24.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class ShopViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

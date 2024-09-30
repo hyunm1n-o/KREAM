@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  KREAM
 //
-//  Created by 오현민 on 9/25/24.
+//  Created by 오현민 on 9/23/24.
 //
 
 import UIKit
@@ -13,10 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        
+        window?.rootViewController = LoginViewController()
+        window?.makeKeyAndVisible()
+    
+        let appearance = UINavigationBar.appearance()
+        
+        appearance.backIndicatorImage = UIImage(named: "KREAM-back")?.withAlignmentRectInsets(UIEdgeInsets(top: -3.0, left: -20.0, bottom: 0.0, right: 0.0))
+        appearance.backIndicatorTransitionMaskImage = UIImage(named: "KREAM-back")
+        
+        appearance.tintColor = .black
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
