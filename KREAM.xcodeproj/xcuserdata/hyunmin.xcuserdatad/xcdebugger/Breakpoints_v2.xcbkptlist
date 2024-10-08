@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AE3F8A78-B88E-40FA-8F5A-378D801A9135"
+            uuid = "59362BCB-070B-47F1-A5AA-06CDA8A70ED8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KREAM/Views/LoginVIew.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "IDLabel"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "logoImageView"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,9 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
         let appearance = UINavigationBar.appearance()
         
-        appearance.backIndicatorImage = UIImage(named: "KREAM-back")?.withAlignmentRectInsets(UIEdgeInsets(top: -3.0, left: -20.0, bottom: 0.0, right: 0.0))
+        appearance.backIndicatorImage = UIImage(named: "KREAM-back")?
+            .withAlignmentRectInsets(UIEdgeInsets(top: -3.0, left: -20.0, bottom: 0.0, right: 0.0))
         appearance.backIndicatorTransitionMaskImage = UIImage(named: "KREAM-back")
-        
         appearance.tintColor = .black
     }
 

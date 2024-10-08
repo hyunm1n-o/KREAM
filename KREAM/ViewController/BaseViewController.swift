@@ -12,7 +12,7 @@ class BaseViewController: UITabBarController {
     private let styleVC = StyleViewController()
     private let shopVC = ShopViewController()
     private let savedVC = SavedViewController()
-    private let myPageVC = MyPageViewController()
+    private let myPageVC = UINavigationController(rootViewController: MyPageViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,8 @@ class BaseViewController: UITabBarController {
         self.viewControllers = [homeVC, styleVC, shopVC, savedVC, myPageVC]
         
         setUpTabbarAppearance()
-        setUpNavigationBarItem()
     }
     
-    private func setUpNavigationBarItem() {
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        self.navigationItem.backBarButtonItem = backBarButtonItem
-    }
     private func setUpTabbarAppearance() {
        
         let appearance = UITabBarAppearance()

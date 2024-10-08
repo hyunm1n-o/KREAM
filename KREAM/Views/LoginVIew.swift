@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 import SnapKit
 
 class LoginView: UIView {
@@ -19,163 +20,117 @@ class LoginView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    public lazy var logoImageView: UIImageView = {
-        let imgView = UIImageView()
-        
-        imgView.image = UIImage(named: "KREAM-logo")
-        imgView.contentMode = .scaleAspectFill
-        
-        return imgView
-    }()
-    
-    public lazy var IDLabel : UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.black
-        label.text = "이메일 주소"
-        label.textAlignment = .left
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    public lazy var pwdLabel : UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.black
-        label.text = "비밀번호"
-        label.textAlignment = .left
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    public lazy var IDTextField : UITextField = {
-        let tf = UITextField()
-        
-        tf.textAlignment = .left
-        tf.font = UIFont.systemFont(ofSize: 12)
-        tf.placeholder = "예) kream@kream.co.kr"
-        tf.setPlaceholderColor(.placeholderGray)
-        
-        tf.layer.cornerRadius = 15
-        tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.tfGray.cgColor
-        
-        tf.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
-        tf.leftViewMode = .always
-        
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tf
-    }()
-    
-    public lazy var pwdTextField : UITextField = {
-        let tf = UITextField()
-        
-        tf.textAlignment = .left
-        tf.font = UIFont.systemFont(ofSize: 12)
-        tf.placeholder = "비밀번호를 입력해주세요"
-        tf.setPlaceholderColor(.placeholderGray)
-        
-        tf.layer.cornerRadius = 15
-        tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.tfGray.cgColor
-        
-        tf.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
-        tf.leftViewMode = .always
-        
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tf
-    }()
-    
 
-    
-    public lazy var loginButton : UIButton = {
-        let btn = UIButton()
+    public lazy var logoImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(named: "KREAM-logo")
+        $0.contentMode = .scaleAspectFill
+    }
+
+    public lazy var IDLabel: UILabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.textColor = UIColor.black
+        $0.text = "이메일 주소"
+        $0.textAlignment = .left
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    public lazy var pwdLabel: UILabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.textColor = UIColor.black
+        $0.text = "비밀번호"
+        $0.textAlignment = .left
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    public lazy var IDTextField: UITextField = UITextField().then {
+        $0.textAlignment = .left
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.placeholder = "예) kream@kream.co.kr"
+        $0.setPlaceholderColor(.placeholderGray)
         
+        $0.layer.cornerRadius = 15
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.tfGray.cgColor
+        
+        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
+        $0.leftViewMode = .always
+        
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    public lazy var pwdTextField: UITextField = UITextField().then {
+        $0.textAlignment = .left
+        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.placeholder = "비밀번호를 입력해주세요"
+        $0.setPlaceholderColor(.placeholderGray)
+        
+        $0.layer.cornerRadius = 15
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.tfGray.cgColor
+        
+        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
+        $0.leftViewMode = .always
+        
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    public lazy var loginButton: UIButton = UIButton().then {
         var config = UIButton.Configuration.filled()
         
         config.baseBackgroundColor = .buttonGray
-        
         config.title = "로그인"
         config.titleAlignment = .center
-        
         config.cornerStyle = .large
         
-        btn.configuration = config
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        
-        return btn
-        
-    }()
-    
-    private lazy var titleContainer : AttributeContainer = {
+        $0.configuration = config
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private lazy var titleContainer: AttributeContainer = {
         var container = AttributeContainer()
         container.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         container.foregroundColor = UIColor.black
-        
         return container
     }()
-    
-    public lazy var kakaoLoginButton : UIButton = {
-        let btn = UIButton()
-        
+
+    public lazy var kakaoLoginButton: UIButton = UIButton().then {
         let leftImageView = UIImageView(image: UIImage(named: "KREAM-kakao"))
-        btn.addSubview(leftImageView)
+        $0.addSubview(leftImageView)
         leftImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(17)
         }
         
         var config = UIButton.Configuration.plain()
-    
         config.attributedTitle = AttributedString("카카오로 로그인", attributes: titleContainer)
         config.titleAlignment = .center
-        
         config.background.strokeWidth = 1
         config.background.strokeColor = .buttonGray
-        
         config.cornerStyle = .large
         
-        btn.configuration = config
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        
-        return btn
-    }()
-    
-    public lazy var appleLoginButton : UIButton = {
-        let btn = UIButton()
-        
+        $0.configuration = config
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    public lazy var appleLoginButton: UIButton = UIButton().then {
         let leftImageView = UIImageView(image: UIImage(named: "KREAM-apple"))
-        btn.addSubview(leftImageView)
+        $0.addSubview(leftImageView)
         leftImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(17)
         }
         
         var config = UIButton.Configuration.plain()
-        
         config.attributedTitle = AttributedString("Apple로 로그인", attributes: titleContainer)
         config.titleAlignment = .center
-        
         config.background.strokeWidth = 1
         config.background.strokeColor = .buttonGray
-        
         config.cornerStyle = .large
         
-        btn.configuration = config
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        
-        return btn
-    }()
+        $0.configuration = config
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     
     private func addComponents() {
         self.addSubview(logoImageView)

@@ -6,10 +6,11 @@
 //
 
 import UIKit
-import Then
 
 class LoginViewController: UIViewController {
 
+    private let loginModel = LoginModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = loginView
@@ -21,12 +22,16 @@ class LoginViewController: UIViewController {
 
     @objc
     private func LoginButtonTapped() {
+        guard let email = loginView.IDTextField.text, !email.isEmpty else { return }
+        guard let pwd = loginView.pwdTextField.text, !pwd.isEmpty else { return }
+                
+        loginModel.saveUserEmail(email)
+        loginModel.saveUserPwd(pwd)
+        
         let BaseVC = BaseViewController()
         
-        let navController = UINavigationController(rootViewController: BaseVC)
-        
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        BaseVC.modalPresentationStyle = .fullScreen
+        present(BaseVC, animated: true)
     }
 }
 

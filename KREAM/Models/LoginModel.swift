@@ -7,7 +7,26 @@
 
 import Foundation
 
-struct LoginModel {
-    var id : String
-    var pwd : String
+class LoginModel {
+    private let userDefaults = UserDefaults.standard
+    private let emailKey: String = "email"
+    private let pwdKey: String = "pwd"
+    
+    public func saveUserEmail(_ email: String) {
+        userDefaults.set(email, forKey: emailKey)
+    }
+    
+    public func saveUserPwd(_ pwd: String) {
+        userDefaults.set(pwd, forKey: pwdKey)
+    }
+
+    public func loadUserEmail() -> String? {
+        return userDefaults.string(forKey: emailKey)
+    }
+
+    public func loadUserPwd() -> String? {
+        return userDefaults.string(forKey: pwdKey)
+    }
+
 }
+

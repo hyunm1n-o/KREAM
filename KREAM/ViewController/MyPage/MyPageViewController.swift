@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import Then
 import SnapKit
 
 class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         addView()
+        setUpNavigationBarItem()
+    }
+    
+    private func setUpNavigationBarItem() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     private lazy var myPageView = MyPageView().then {

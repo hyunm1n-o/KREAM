@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class ProfileManageView: UIView {
 
@@ -22,6 +24,9 @@ class ProfileManageView: UIView {
     public lazy var profileImageView = UIImageView().then {
         $0.image = UIImage(named: "KREAM-profileImage")
         $0.contentMode = .scaleAspectFill
+        
+        $0.layer.cornerRadius = 45
+        $0.clipsToBounds = true
     }
     
     public lazy var infoView = UIView()
@@ -100,6 +105,8 @@ class ProfileManageView: UIView {
         
         $0.configuration = config
         $0.translatesAutoresizingMaskIntoConstraints = false
+        
+        $0.isUserInteractionEnabled = true
     }
     
    public lazy var userPwdChangeButton = UIButton().then {
@@ -115,6 +122,8 @@ class ProfileManageView: UIView {
         
         $0.configuration = config
         $0.translatesAutoresizingMaskIntoConstraints = false
+       
+       $0.isUserInteractionEnabled = true
     }
     
     private func addComponents() {
@@ -134,6 +143,7 @@ class ProfileManageView: UIView {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.safeAreaLayoutGuide).inset(52)
+            make.width.height.equalTo(90)
         }
         
         infoView.snp.makeConstraints { make in

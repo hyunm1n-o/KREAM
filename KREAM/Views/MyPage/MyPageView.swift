@@ -7,6 +7,7 @@
 
 import UIKit
 import Then
+import SnapKit
 
 class MyPageView: UIView {
 
@@ -41,10 +42,13 @@ class MyPageView: UIView {
     public lazy var profileImageView = UIImageView().then {
         $0.image = UIImage(named: "KREAM-profileImage")
         $0.contentMode = .scaleAspectFill
+        
+        $0.layer.cornerRadius = 45
+        $0.clipsToBounds = true
     }
     
     public lazy var nicknameLabel = UILabel().then {
-        $0.text = "Jeong_iOS"
+        $0.text = "햄민"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +150,7 @@ class MyPageView: UIView {
         profileImageView.snp.makeConstraints { make in
             make.top.equalTo(settingButton.snp.bottom).offset(26)
             make.leading.equalToSuperview()
+            make.width.height.equalTo(90)
         }
         
         infoView.snp.makeConstraints { make in
