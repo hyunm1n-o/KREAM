@@ -37,11 +37,11 @@ class MyPageViewController: UIViewController {
         
         view.addSubview(myPageView)
         
-        myPageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(328)
-            make.height.equalTo(193)
-            make.centerX.equalToSuperview()
+        myPageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalTo(328)
+            $0.height.equalTo(193)
+            $0.centerX.equalToSuperview()
         }
     }
 

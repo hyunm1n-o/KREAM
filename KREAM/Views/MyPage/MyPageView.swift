@@ -137,51 +137,52 @@ class MyPageView: UIView {
         self.addSubview(profileManageButton)
         self.addSubview(profileShareButton)
         
-        settingButton.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
-            make.width.height.equalTo(25)
+        settingButton.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.width.height.equalTo(25)
         }
-        
-        cameraButton.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview()
-            make.width.height.equalTo(25)
+
+        cameraButton.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.width.height.equalTo(25)
         }
-        
-        profileImageView.snp.makeConstraints { make in
-            make.top.equalTo(settingButton.snp.bottom).offset(26)
-            make.leading.equalToSuperview()
-            make.width.height.equalTo(90)
+
+        profileImageView.snp.makeConstraints {
+            $0.top.equalTo(settingButton.snp.bottom).offset(26)
+            $0.leading.equalToSuperview()
+            $0.width.height.equalTo(90)
         }
-        
-        infoView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalTo(115)
-            make.height.equalTo(48)
+
+        infoView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(115)
+            $0.height.equalTo(48)
         }
-        
-        nicknameLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
+
+        nicknameLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
         }
-        
-        followerLabel.snp.makeConstraints { make in
-            make.bottom.leading.equalToSuperview()
+
+        followerLabel.snp.makeConstraints {
+            $0.bottom.leading.equalToSuperview()
         }
-        
-        followingLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.leading.equalTo(followerLabel.snp.trailing).offset(8)
+
+        followingLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.leading.equalTo(followerLabel.snp.trailing).offset(8)
         }
-        
-        profileManageButton.snp.makeConstraints { make in
-            make.bottom.leading.equalToSuperview()
-            make.width.equalTo(157)
-            make.height.equalTo(26)
+
+        profileManageButton.snp.makeConstraints {
+            $0.bottom.leading.equalToSuperview()
+            $0.width.equalTo(157)
+            $0.height.equalTo(26)
         }
-        
-        profileShareButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalToSuperview()
-            make.width.equalTo(157)
-            make.height.equalTo(26)
+
+        profileShareButton.snp.makeConstraints {
+            $0.bottom.trailing.equalToSuperview()
+            $0.width.equalTo(157)
+            $0.height.equalTo(26)
         }
+
     }
 }

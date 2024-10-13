@@ -13,17 +13,6 @@ class SavedView: UIView {
 
     let totalCount = dummySavedModel.savedDatas.count
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        setViews()
-        setConstaints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - 컴포넌트
     private lazy var titleLabel = UILabel().then {
         $0.text = "Saved"
@@ -45,6 +34,17 @@ class SavedView: UIView {
     }
     
     //MARK: - 화면 설정
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        setViews()
+        setConstaints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setViews() {
         self.addSubview(titleLabel)
         self.addSubview(totalLabel)
@@ -52,20 +52,21 @@ class SavedView: UIView {
     }
     
     private func setConstaints() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(61)
-            make.leading.equalToSuperview().inset(10)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(61)
+            $0.leading.equalToSuperview().inset(10)
         }
-        
-        totalLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.leading.equalToSuperview().inset(13)
+
+        totalLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(13)
         }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(totalLabel.snp.bottom).offset(12)
-            make.leading.trailing.bottom.equalToSuperview()
+
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(totalLabel.snp.bottom).offset(12)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
+
     }
     
 }

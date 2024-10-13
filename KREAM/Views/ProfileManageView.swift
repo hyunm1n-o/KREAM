@@ -140,60 +140,61 @@ class ProfileManageView: UIView {
         infoView.addSubview(userPwdTextField)
         infoView.addSubview(userPwdChangeButton)
         
-        profileImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(52)
-            make.width.height.equalTo(90)
+        profileImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide).inset(52)
+            $0.width.height.equalTo(90)
         }
-        
-        infoView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(20)
-            make.width.equalTo(349)
-            make.height.equalTo(191)
+
+        infoView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(profileImageView.snp.bottom).offset(20)
+            $0.width.equalTo(349)
+            $0.height.equalTo(191)
         }
-        
-        profileInfoLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
+
+        profileInfoLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
         }
-        
-        userEmailLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileInfoLabel.snp.bottom).offset(23)
-            make.leading.equalToSuperview()
+
+        userEmailLabel.snp.makeConstraints {
+            $0.top.equalTo(profileInfoLabel.snp.bottom).offset(23)
+            $0.leading.equalToSuperview()
         }
-        
-        userEmailTextField.snp.makeConstraints { make in
-            make.top.equalTo(userEmailLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview().inset(67)
-            make.height.equalTo(32)
+
+        userEmailTextField.snp.makeConstraints {
+            $0.top.equalTo(userEmailLabel.snp.bottom).offset(4)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(67)
+            $0.height.equalTo(32)
         }
-        
-        userEmailChangeButton.snp.makeConstraints { make in
-            make.top.equalTo(userEmailLabel.snp.bottom).offset(4)
-            make.trailing.equalToSuperview()
-            make.width.equalTo(58)
-            make.height.equalTo(32)
+
+        userEmailChangeButton.snp.makeConstraints {
+            $0.top.equalTo(userEmailLabel.snp.bottom).offset(4)
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(58)
+            $0.height.equalTo(32)
         }
-        
-        userPwdLabel.snp.makeConstraints { make in
-            make.top.equalTo(userEmailTextField.snp.bottom).offset(23)
-            make.leading.equalToSuperview()
+
+        userPwdLabel.snp.makeConstraints {
+            $0.top.equalTo(userEmailTextField.snp.bottom).offset(23)
+            $0.leading.equalToSuperview()
         }
-        
-        userPwdTextField.snp.makeConstraints { make in
-            make.top.equalTo(userPwdLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview().inset(67)
-            make.height.equalTo(32)
+
+        userPwdTextField.snp.makeConstraints {
+            $0.top.equalTo(userPwdLabel.snp.bottom).offset(4)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(67)
+            $0.height.equalTo(32)
         }
-        
-        userPwdChangeButton.snp.makeConstraints { make in
-            make.top.equalTo(userPwdLabel.snp.bottom).offset(4)
-            make.trailing.equalToSuperview()
-            make.width.equalTo(58)
-            make.height.equalTo(32)
+
+        userPwdChangeButton.snp.makeConstraints {
+            $0.top.equalTo(userPwdLabel.snp.bottom).offset(4)
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(58)
+            $0.height.equalTo(32)
         }
+
         
         
     }

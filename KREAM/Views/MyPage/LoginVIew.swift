@@ -10,16 +10,6 @@ import Then
 import SnapKit
 
 class LoginView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        self.addComponents()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     public lazy var logoImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "KREAM-logo")
@@ -131,6 +121,16 @@ class LoginView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    //MARK: - 화면 설정
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        self.addComponents()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func addComponents() {
         self.addSubview(logoImageView)
@@ -142,51 +142,52 @@ class LoginView: UIView {
         self.addSubview(kakaoLoginButton)
         self.addSubview(appleLoginButton)
         
-        logoImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(126)
-            make.width.equalTo(287)
-            make.height.equalTo(75)
+        logoImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(126)
+            $0.width.equalTo(287)
+            $0.height.equalTo(75)
         }
-        
-        IDLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(87)
-            make.leading.trailing.equalToSuperview().inset(45)
+
+        IDLabel.snp.makeConstraints {
+            $0.top.equalTo(logoImageView.snp.bottom).offset(87)
+            $0.leading.trailing.equalToSuperview().inset(45)
         }
-        
-        pwdLabel.snp.makeConstraints { make in
-            make.top.equalTo(IDTextField.snp.bottom).offset(17)
-            make.leading.trailing.equalToSuperview().inset(45)
+
+        pwdLabel.snp.makeConstraints {
+            $0.top.equalTo(IDTextField.snp.bottom).offset(17)
+            $0.leading.trailing.equalToSuperview().inset(45)
         }
-        
-        IDTextField.snp.makeConstraints { make in
-            make.top.equalTo(IDLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(45)
-            make.height.equalTo(34)
+
+        IDTextField.snp.makeConstraints {
+            $0.top.equalTo(IDLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(45)
+            $0.height.equalTo(34)
         }
-        
-        pwdTextField.snp.makeConstraints { make in
-            make.top.equalTo(pwdLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(45)
-            make.height.equalTo(34)
+
+        pwdTextField.snp.makeConstraints {
+            $0.top.equalTo(pwdLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview().inset(45)
+            $0.height.equalTo(34)
         }
-        
-        loginButton.snp.makeConstraints { make in
-            make.top.equalTo(pwdTextField.snp.bottom).offset(17)
-            make.leading.trailing.equalToSuperview().inset(45)
-            make.height.equalTo(38)
+
+        loginButton.snp.makeConstraints {
+            $0.top.equalTo(pwdTextField.snp.bottom).offset(17)
+            $0.leading.trailing.equalToSuperview().inset(45)
+            $0.height.equalTo(38)
         }
-        
-        kakaoLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(87)
-            make.leading.trailing.equalToSuperview().inset(45)
-            make.height.equalTo(40)
+
+        kakaoLoginButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(87)
+            $0.leading.trailing.equalToSuperview().inset(45)
+            $0.height.equalTo(40)
         }
-        
-        appleLoginButton.snp.makeConstraints { make in
-            make.top.equalTo(kakaoLoginButton.snp.bottom).offset(22)
-            make.leading.trailing.equalToSuperview().inset(45)
-            make.height.equalTo(40)
+
+        appleLoginButton.snp.makeConstraints {
+            $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(22)
+            $0.leading.trailing.equalToSuperview().inset(45)
+            $0.height.equalTo(40)
         }
+
     }
 }
