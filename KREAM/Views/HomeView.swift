@@ -9,14 +9,27 @@ import UIKit
 
 class HomeView: UIView {
     
-    //MARK: - 컴포넌트
-    /* 검색버튼, 알림버튼, 세그먼트컨트롤, 배너이미지뷰, 컬렉션뷰*/
+    //MARK: - 기본 컴포넌트
+    private lazy var scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = true
+        $0.showsHorizontalScrollIndicator = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public lazy var stackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.distribution = .equalSpacing
+        $0.alignment = .fill
+        $0.spacing = 20
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     public lazy var segmentedControl = UISegmentedControl(items: ["추천", "랭킹", "발매정보", "럭셔리", "남성", "여성"]).then {
         $0.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         $0.setBackgroundImage(UIImage(), for: .selected, barMetrics: .default)
         $0.setBackgroundImage(UIImage(), for: .highlighted, barMetrics: .default)
         $0.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .selected, barMetrics: .default)
-        
+    
         $0.setContentOffset(CGSize(width: -5, height: 0), forSegmentAt: 1)
         $0.setContentOffset(CGSize(width: 8, height: 0), forSegmentAt: 3)
         $0.setContentOffset(CGSize(width: 5, height: 0), forSegmentAt: 4)
@@ -28,7 +41,6 @@ class HomeView: UIView {
             ],
             for: .normal
         )
-        
         $0.setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
@@ -83,7 +95,7 @@ class HomeView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    public lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    public lazy var firstCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.estimatedItemSize = .init(width: 61, height: 81)
         $0.minimumLineSpacing = 20
         $0.minimumInteritemSpacing = 9
@@ -91,6 +103,71 @@ class HomeView: UIView {
     }).then {
         $0.isScrollEnabled = false
         $0.register(HomeCell.self, forCellWithReuseIdentifier: HomeCell.identifier)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    //MARK: - 구분선
+    private lazy var divideLine1 = DivideLineView()
+    
+    private lazy var justDroppedView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var justDroppedLabel = UILabel().then {
+        $0.text = "Just Dropped"
+        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.textColor = .black
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var justDroppedSubLabel = UILabel().then {
+        $0.text = "발매 상품"
+        $0.font = .systemFont(ofSize: 13, weight: .light)
+        $0.textColor = ._878787
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public lazy var secondCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.estimatedItemSize = .init(width: 142, height: 237)
+        $0.minimumInteritemSpacing = 8
+        $0.scrollDirection = .horizontal
+    }).then {
+        $0.isScrollEnabled = true
+        $0.register(JustDroppedCell.self, forCellWithReuseIdentifier: JustDroppedCell.identifier)
+        $0.showsHorizontalScrollIndicator = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    //MARK: - 구분선
+    private lazy var divideLine2 = DivideLineView()
+    
+    private lazy var coldWaveView = UIView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var coldWaveLabel = UILabel().then {
+        $0.text = "본격 한파대비! 연말 필수템 모음"
+        $0.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.textColor = .black
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var coldWaveSubLabel = UILabel().then {
+        $0.text = "#해피홀리룩챌린지"
+        $0.font = .systemFont(ofSize: 13, weight: .light)
+        $0.textColor = ._878787
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public lazy var thirdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.estimatedItemSize = .init(width: 124, height: 165)
+        $0.minimumInteritemSpacing = 8
+        $0.scrollDirection = .horizontal
+    }).then {
+        $0.isScrollEnabled = true
+        $0.register(ColdWaveCell.self, forCellWithReuseIdentifier: ColdWaveCell.identifier)
+        $0.showsHorizontalScrollIndicator = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     //MARK: - 화면 설정
@@ -99,24 +176,55 @@ class HomeView: UIView {
         self.backgroundColor = .white
         
         setView()
+        setStackView()
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setStackView() {
+        stackView.addArrangedSubview(adImageView)
+        stackView.addArrangedSubview(firstCollectionView)
+        
+        stackView.addArrangedSubview(divideLine1)
+        stackView.addArrangedSubview(justDroppedView)
+        
+        stackView.addArrangedSubview(divideLine2)
+        stackView.addArrangedSubview(coldWaveView)
+    }
+    
     private func setView() {
+        self.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        
         self.addSubview(searchField)
         self.addSubview(alertButton)
         self.addSubview(segmentedControl)
         self.addSubview(underLineView)
-        self.addSubview(adImageView)
-        self.addSubview(collectionView)
+        
+        // 스택뷰
+        justDroppedView.addSubview(justDroppedLabel)
+        justDroppedView.addSubview(justDroppedSubLabel)
+        justDroppedView.addSubview(secondCollectionView)
+        
+        coldWaveView.addSubview(coldWaveLabel)
+        coldWaveView.addSubview(coldWaveSubLabel)
+        coldWaveView.addSubview(thirdCollectionView)
     }
     
     private func setConstraints() {
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(underLineView.snp.bottom)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(scrollView.snp.width)
+        }
+        
         searchField.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(6)
             $0.leading.equalToSuperview().inset(16)
@@ -144,17 +252,67 @@ class HomeView: UIView {
             $0.width.equalTo(28)
         }
         
+        // 스택뷰
         adImageView.snp.makeConstraints {
-            $0.top.equalTo(underLineView.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(336)
         }
         
-        collectionView.snp.makeConstraints {
-            $0.top.equalTo(adImageView.snp.bottom).offset(20)
+        firstCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(182)
         }
         
+        divideLine1.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        justDroppedView.snp.makeConstraints {
+            $0.height.equalTo(300) // +10
+        }
+        
+        justDroppedLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        justDroppedSubLabel.snp.makeConstraints {
+            $0.top.equalTo(justDroppedLabel.snp.bottom).offset(4)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        secondCollectionView.snp.makeConstraints {
+            $0.top.equalTo(justDroppedSubLabel.snp.bottom).offset(14)
+            $0.leading.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(237)
+        }
+        
+        divideLine2.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        coldWaveView.snp.makeConstraints {
+            $0.height.equalTo(228) // +10
+        }
+        
+        coldWaveLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        coldWaveSubLabel.snp.makeConstraints {
+            $0.top.equalTo(coldWaveLabel.snp.bottom).offset(4)
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        thirdCollectionView.snp.makeConstraints {
+            $0.top.equalTo(coldWaveSubLabel.snp.bottom).offset(14)
+            $0.leading.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(165)
+        }
     }
 }

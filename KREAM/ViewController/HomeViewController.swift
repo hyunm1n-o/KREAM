@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
         
         setupAction()
         setupDelegate()
+        setupTag()
     }
     
     private lazy var homeView = HomeView().then {
@@ -26,8 +27,20 @@ class HomeViewController: UIViewController {
     }
 
     private func setupDelegate() {
-        homeView.collectionView.delegate = self
-        homeView.collectionView.dataSource = self
+        homeView.firstCollectionView.delegate = self
+        homeView.firstCollectionView.dataSource = self
+        
+        homeView.secondCollectionView.delegate = self
+        homeView.secondCollectionView.dataSource = self
+        
+        homeView.thirdCollectionView.delegate = self
+        homeView.thirdCollectionView.dataSource = self
+    }
+    
+    private func setupTag() {
+        homeView.firstCollectionView.tag = 1
+        homeView.secondCollectionView.tag = 2
+        homeView.thirdCollectionView.tag = 3
     }
     
     private func setupAction() {
@@ -58,34 +71,22 @@ class HomeViewController: UIViewController {
     private func segmentControlValueChanged(segment: UISegmentedControl) {
         switch segment.selectedSegmentIndex {
         case 0:
-            homeView.adImageView.isHidden = false
-            homeView.collectionView.isHidden = false
-            
+            homeView.stackView.isHidden = false
             changeLinePosition(leading: 16, width: 28)
         case 1:
-            homeView.adImageView.isHidden = true
-            homeView.collectionView.isHidden = true
-            
+            homeView.stackView.isHidden = true
             changeLinePosition(leading: 71, width: 28)
         case 2:
-            homeView.adImageView.isHidden = true
-            homeView.collectionView.isHidden = true
-            
+            homeView.stackView.isHidden = true
             changeLinePosition(leading: 123, width: 56)
         case 3:
-            homeView.adImageView.isHidden = true
-            homeView.collectionView.isHidden = true
-            
+            homeView.stackView.isHidden = true
             changeLinePosition(leading: 199, width: 42)
         case 4:
-            homeView.adImageView.isHidden = true
-            homeView.collectionView.isHidden = true
-            
+            homeView.stackView.isHidden = true
             changeLinePosition(leading: 264, width: 28)
         case 5:
-            homeView.adImageView.isHidden = true
-            homeView.collectionView.isHidden = true
-            
+            homeView.stackView.isHidden = true
             changeLinePosition(leading: 320, width: 28)
         default:
             break
@@ -95,20 +96,64 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return HomeModel.dummy().count
+        if collectionView.tag == 1 {
+            return HomeModel.dummy().count
+        }
+        if collectionView.tag == 2 {
+            return JustDroppedModel.dummy().count
+        }
+        if collectionView.tag == 3 {
+            return ColdWaveModel.dummy().count
+        }
+        
+        fatalError("Unexpected collection view tag: \(collectionView.tag)")
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: HomeCell.identifier,
-            for: indexPath) as? HomeCell else {
-            return UICollectionViewCell()
+        
+        // fristCollectionView
+        if collectionView.tag == 1 {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: HomeCell.identifier,
+                for: indexPath) as? HomeCell else {
+                return UICollectionViewCell()
+            }
+            let list = HomeModel.dummy()
+            
+            cell.imageView.image = list[indexPath.row].homeImage
+            cell.titleLabel.text = list[indexPath.row].homeTitle
+            return cell
         }
-        let list = HomeModel.dummy()
+        // secondCollectionView
+        if collectionView.tag == 2 {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: JustDroppedCell.identifier,
+                for: indexPath) as? JustDroppedCell else {
+                return UICollectionViewCell()
+            }
+            let list = JustDroppedModel.dummy()
+            
+            cell.imageView.image = list[indexPath.row].image
+            cell.transactionsLabel.text = "거래 \(String(format: "%.1f", list[indexPath.row].transactions))만"
+            cell.brandLabel.text = list[indexPath.row].brand
+            cell.productLabel.text = list[indexPath.row].product
+            cell.priceLabel.text = list[indexPath.row].price
+            return cell
+        }
+        // thirdCollectionView
+        if collectionView.tag == 3 {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ColdWaveCell.identifier,
+                for: indexPath) as? ColdWaveCell else {
+                return UICollectionViewCell()
+            }
+            let list = ColdWaveModel.dummy()
+            
+            cell.imageView.image = list[indexPath.row].image
+            cell.instaIDLabel.text = list[indexPath.row].instaID
+            return cell
+        }
         
-        cell.imageView.image = list[indexPath.row].homeImage
-        cell.titleLabel.text = list[indexPath.row].homeTitle
-        
-        return cell
+        fatalError("Unexpected collection view tag: \(collectionView.tag)")
     }
 }
