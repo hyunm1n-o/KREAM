@@ -16,6 +16,15 @@ class HomeViewController: UIViewController {
         setupAction()
         setupDelegate()
         setupTag()
+        setUpNavigationBarItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+      navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+      navigationController?.isNavigationBarHidden = false // 뷰 컨트롤러가 사라질 때 나타내기
     }
     
     private lazy var homeView = HomeView().then {
@@ -49,6 +58,11 @@ class HomeViewController: UIViewController {
             action: #selector(segmentControlValueChanged(segment: )),
             for: .valueChanged
         )
+    }
+    
+    private func setUpNavigationBarItem() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     private func changeLinePosition(leading: Int, width: Int) {
@@ -110,8 +124,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        // fristCollectionView
         if collectionView.tag == 1 {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: HomeCell.identifier,
@@ -124,7 +136,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.titleLabel.text = list[indexPath.row].homeTitle
             return cell
         }
-        // secondCollectionView
         if collectionView.tag == 2 {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: JustDroppedCell.identifier,
@@ -140,7 +151,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.priceLabel.text = list[indexPath.row].price
             return cell
         }
-        // thirdCollectionView
         if collectionView.tag == 3 {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ColdWaveCell.identifier,
@@ -155,5 +165,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         fatalError("Unexpected collection view tag: \(collectionView.tag)")
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 2 {
+            if indexPath.item == 0 {
+                // 6주차 페이지로 넘겨주기
+                let detailVC = DetailViewController()
+                navigationController?.pushViewController(detailVC, animated: true)
+            }
+        }
     }
 }
