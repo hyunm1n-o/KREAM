@@ -1,5 +1,5 @@
 //
-//  BottomView.swift
+//  purchaseBottomView.swift
 //  KREAM
 //
 //  Created by 오현민 on 11/2/24.
@@ -8,22 +8,8 @@
 
 import UIKit
 
-class BottomView2: UIView {
-    
-    private lazy var buttonStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.distribution = .fillEqually
-        $0.spacing = 6
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    private lazy var titleContainer: AttributeContainer = {
-        var container = AttributeContainer()
-        container.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        container.foregroundColor = .white
-        return container
-    }()
-    
+class purchaseBottomView: BottomView {
+
     private lazy var quickSubtitleContainer: AttributeContainer = {
         var container = AttributeContainer()
         container.font = UIFont.systemFont(ofSize: 10, weight: .light)
@@ -78,17 +64,16 @@ class BottomView2: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setStackView() {
+    override func setStackView() {
         buttonStackView.addArrangedSubview(quickDeliveryButton)
         buttonStackView.addArrangedSubview(standardDeliveryButton)
     }
     
-    private func setView() {
-        self.addSubview(buttonStackView)
+    override func setView() {
+        super.setView()
     }
     
-    private func setConstraints() {
-    
+    override func setConstraints() {
         buttonStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
             $0.horizontalEdges.equalToSuperview().inset(16)

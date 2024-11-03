@@ -72,7 +72,7 @@ class PurchaseView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    public lazy var bottomView = BottomView2().then {
+    public lazy var bottomView = purchaseBottomView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     

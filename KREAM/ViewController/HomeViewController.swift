@@ -8,7 +8,14 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
+    private lazy var homeDelegate = HomeCollectionViewDelegate(navigationController: self.navigationController)
+    private lazy var homeDataSource = HomeCollectionViewDataSource(
+        homeData: HomeModel.dummy(),
+        justdroppedData: JustDroppedModel.dummy(),
+        coldWaveData: ColdWaveModel.dummy()
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = homeView
@@ -20,11 +27,11 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
+        navigationController?.isNavigationBarHidden = true // 뷰 컨트롤러가 나타날 때 숨기기
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
-      navigationController?.isNavigationBarHidden = false // 뷰 컨트롤러가 사라질 때 나타내기
+        navigationController?.isNavigationBarHidden = false // 뷰 컨트롤러가 사라질 때 나타내기
     }
     
     private lazy var homeView = HomeView().then {
@@ -34,16 +41,16 @@ class HomeViewController: UIViewController {
             for: .touchUpInside
         )
     }
-
+    
     private func setupDelegate() {
-        homeView.firstCollectionView.delegate = self
-        homeView.firstCollectionView.dataSource = self
+        homeView.firstCollectionView.delegate = homeDelegate
+        homeView.firstCollectionView.dataSource = homeDataSource
         
-        homeView.secondCollectionView.delegate = self
-        homeView.secondCollectionView.dataSource = self
+        homeView.secondCollectionView.delegate = homeDelegate
+        homeView.secondCollectionView.dataSource = homeDataSource
         
-        homeView.thirdCollectionView.delegate = self
-        homeView.thirdCollectionView.dataSource = self
+        homeView.thirdCollectionView.delegate = homeDelegate
+        homeView.thirdCollectionView.dataSource = homeDataSource
     }
     
     private func setupTag() {
@@ -104,75 +111,6 @@ class HomeViewController: UIViewController {
             changeLinePosition(leading: 320, width: 28)
         default:
             break
-        }
-    }
-}
-
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 1 {
-            return HomeModel.dummy().count
-        }
-        if collectionView.tag == 2 {
-            return JustDroppedModel.dummy().count
-        }
-        if collectionView.tag == 3 {
-            return ColdWaveModel.dummy().count
-        }
-        
-        fatalError("Unexpected collection view tag: \(collectionView.tag)")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView.tag == 1 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: HomeCell.identifier,
-                for: indexPath) as? HomeCell else {
-                return UICollectionViewCell()
-            }
-            let list = HomeModel.dummy()
-            
-            cell.imageView.image = list[indexPath.row].homeImage
-            cell.titleLabel.text = list[indexPath.row].homeTitle
-            return cell
-        }
-        if collectionView.tag == 2 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: JustDroppedCell.identifier,
-                for: indexPath) as? JustDroppedCell else {
-                return UICollectionViewCell()
-            }
-            let list = JustDroppedModel.dummy()
-            
-            cell.imageView.image = list[indexPath.row].image
-            cell.transactionsLabel.text = "거래 \(String(format: "%.1f", list[indexPath.row].transactions))만"
-            cell.brandLabel.text = list[indexPath.row].brand
-            cell.productLabel.text = list[indexPath.row].product
-            cell.priceLabel.text = list[indexPath.row].price
-            return cell
-        }
-        if collectionView.tag == 3 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ColdWaveCell.identifier,
-                for: indexPath) as? ColdWaveCell else {
-                return UICollectionViewCell()
-            }
-            let list = ColdWaveModel.dummy()
-            
-            cell.imageView.image = list[indexPath.row].image
-            cell.instaIDLabel.text = list[indexPath.row].instaID
-            return cell
-        }
-        
-        fatalError("Unexpected collection view tag: \(collectionView.tag)")
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.tag == 2 {
-            if indexPath.item == 0 {
-                // 6주차 페이지로 넘겨주기
-                let detailVC = DetailViewController()
-                navigationController?.pushViewController(detailVC, animated: true)
-            }
         }
     }
 }

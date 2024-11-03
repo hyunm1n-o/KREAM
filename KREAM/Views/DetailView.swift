@@ -63,7 +63,7 @@ class DetailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    public lazy var bottomView = BottomView().then {
+    public lazy var bottomView = DetailBottomView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
