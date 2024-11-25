@@ -11,6 +11,7 @@ class LoginModel {
     private let userDefaults = UserDefaults.standard
     private let emailKey: String = "email"
     private let pwdKey: String = "pwd"
+    private let nameKey: String = "name"
     
     public func saveUserEmail(_ email: String) {
         userDefaults.set(email, forKey: emailKey)
@@ -18,6 +19,10 @@ class LoginModel {
     
     public func saveUserPwd(_ pwd: String) {
         userDefaults.set(pwd, forKey: pwdKey)
+    }
+    
+    public func saveUserName(_ name: String) {
+        userDefaults.set(name, forKey: nameKey)
     }
 
     public func loadUserEmail() -> String? {
@@ -28,5 +33,8 @@ class LoginModel {
         return userDefaults.string(forKey: pwdKey)
     }
 
+    public func loadUserName() -> String? {
+        return userDefaults.string(forKey: nameKey)
+    }
 }
 

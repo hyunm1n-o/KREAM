@@ -81,10 +81,12 @@ class HomeViewController: UIViewController {
         })
     }
     
+    // MARK: - @objc
     @objc
     private func searchFieldTapped() {
         let searchVC = SearchViewController()
-        searchVC.modalPresentationStyle = .automatic
+        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.view.backgroundColor = .white
         present(searchVC, animated: true)
     }
     

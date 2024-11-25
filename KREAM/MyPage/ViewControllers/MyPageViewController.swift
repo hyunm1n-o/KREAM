@@ -11,19 +11,31 @@ import SnapKit
 
 class MyPageViewController: UIViewController {
     
+    private let loginModel = LoginModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addView()
         setUpNavigationBarItem()
+        
+        loadProfileValue()
+    }
+    
+    ///View
+    private lazy var myPageView = MyPageView().then {
+        $0.profileManageButton.addTarget(self, action: #selector(profileManageButtonTapped), for: .touchUpInside)
+    }
+    
+    // 기능
+    private func loadProfileValue() {
+        if let userName = loginModel.loadUserName() {
+            myPageView.nicknameLabel.text = userName
+        }
     }
     
     private func setUpNavigationBarItem() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = backBarButtonItem
-    }
-    
-    private lazy var myPageView = MyPageView().then {
-        $0.profileManageButton.addTarget(self, action: #selector(profileManageButtonTapped), for: .touchUpInside)
     }
     
     @objc
