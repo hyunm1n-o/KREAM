@@ -23,6 +23,7 @@ class ColdWaveCell: UICollectionViewCell {
     public lazy var imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -31,6 +32,12 @@ class ColdWaveCell: UICollectionViewCell {
         $0.textColor = .white
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    public func loadImage(from url: String) {
+        if let imageURL = URL(string: url) {
+            imageView.kf.setImage(with: imageURL)
+        }
     }
     
     private func setView() {

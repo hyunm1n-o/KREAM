@@ -53,7 +53,7 @@ class HomeCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             }
             let list = JustDroppedModel.dummy()
             
-            cell.imageView.image = list[indexPath.row].image
+            cell.loadImage(from: list[indexPath.row].imageURL)
             cell.transactionsLabel.text = "거래 \(String(format: "%.1f", list[indexPath.row].transactions))만"
             cell.brandLabel.text = list[indexPath.row].brand
             cell.productLabel.text = list[indexPath.row].product
@@ -67,7 +67,7 @@ class HomeCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             }
             let list = ColdWaveModel.dummy()
             
-            cell.imageView.image = list[indexPath.row].image
+            cell.loadImage(from: list[indexPath.row].imageURL)
             cell.instaIDLabel.text = list[indexPath.row].instaID
             return cell
         default:

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class JustDroppedCell: UICollectionViewCell {
     static let identifier = "JusutDroppedCell"
@@ -23,6 +24,7 @@ class JustDroppedCell: UICollectionViewCell {
     public lazy var imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -73,6 +75,12 @@ class JustDroppedCell: UICollectionViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    public func loadImage(from url: String) {
+        if let imageURL = URL(string: url) {
+            imageView.kf.setImage(with: imageURL)
+        }
+    }
+    
     @objc
     private func scrapButtonTapped(_ sender: UIButton) {
         var config = UIButton.Configuration.plain()
@@ -87,6 +95,7 @@ class JustDroppedCell: UICollectionViewCell {
         config.baseBackgroundColor = .clear
         sender.configuration = config
     }
+    
     private func setView() {
         [
             imageView,
